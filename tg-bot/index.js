@@ -2,7 +2,7 @@ const TelegramBot = require("node-telegram-bot-api");
 
 const token = "7330075223:AAE_uunxcVXUvfC0rCPpnvGJ9bt-QqbkesA";
 
-const webAppUrl = "https://subtle-paletas-fed0da.netlify.app/";
+const webAppUrl = "https://subtle-paletas-fed0da.netlify.app";
 
 const bot = new TelegramBot(token, { polling: true });
 
@@ -36,5 +36,15 @@ bot.on("message", async (msg) => {
         ],
       },
     });
+  }
+
+  if (msg?.web_app_data?.data) {
+    try {
+      const data = JSON.parse(msg.web_app_data.data);
+      await bot.sendMessage(chatId, "Thank you for filling the form!");
+      await bot.sendMessage(chatId, `Country: ${data.country}`);
+    } catch (error) {
+      console.log(error);
+    }
   }
 });
