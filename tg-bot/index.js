@@ -13,10 +13,23 @@ bot.on("message", async (msg) => {
   if (text === "/start") {
     await bot.sendMessage(chatId, "Fill the form below!", {
       reply_markup: {
-        inline_keyboard: [
+        keyboard: [
           [
             {
               text: "Fill the form",
+              web_app: { url: webAppUrl + "/form" },
+            },
+          ],
+        ],
+      },
+    });
+
+    await bot.sendMessage(chatId, "Fill the form below!", {
+      reply_markup: {
+        inline_keyboard: [
+          [
+            {
+              text: "Open App",
               web_app: { url: webAppUrl },
             },
           ],
